@@ -24,7 +24,6 @@
                />
             </div>
             <button class="button-form" type="submit">Продолжить</button>
-            <!--  -->
          </form>
          <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
@@ -58,68 +57,64 @@ const handleRegisterSubmit = () => {
 </script>
 
 <style scoped lang="scss">
-.form-register {
-   width: 518px;
-   height: auto;
-   border-radius: 36px;
-   background-color: #fff;
-   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-   padding: 35px;
+.form {
+   &-register {
+      width: 518px;
+      height: auto;
+      border-radius: 36px;
+      background-color: #fff;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+      padding: 35px;
+   }
 
-   .form-container {
+   &-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 95px;
       padding-bottom: 95px;
+   }
+}
+label {
+   display: block;
+   margin-bottom: 4px;
+   font-weight: 600;
+   font-size: 16px;
+   color: #333;
+}
 
-      .form-group {
-         width: 100%;
-         margin-bottom: 20px;
-         padding: 12px;
+input {
+   width: calc(100% - 24px);
+   padding: 12px;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   font-size: 16px;
 
-         label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 600;
-            font-size: 16px;
-            color: #333;
-         }
+   &:focus {
+      border-color: #526378;
+      box-shadow: 0 0 5px rgba(76, 121, 170, 0.5);
+      outline: none;
+   }
+}
 
-         input {
-            width: calc(100% - 24px);
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
+.button {
+   &-form {
+      width: 100%;
+      padding: 12px;
+      background-color: rgba(0, 220, 150, 0.28);
+      color: rgb(11, 11, 11);
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
 
-            &:focus {
-               border-color: #526378;
-               box-shadow: 0 0 5px rgba(76, 121, 170, 0.5);
-               outline: none;
-            }
-         }
-      }
-
-      .button-form {
-         width: 100%;
-         padding: 12px;
-         background-color: rgba(0, 220, 150, 0.28);
-         color: rgb(11, 11, 11);
-         border: none;
-         border-radius: 8px;
-         font-size: 20px;
-         font-weight: 700;
-         cursor: pointer;
-         transition: background-color 0.3s ease;
-
-         &:hover {
-            background-color: rgba(47, 171, 132, 0.5);
-         }
+      &:hover {
+         background-color: rgba(47, 171, 132, 0.5);
       }
    }
-
-   .button-back {
+   &-back {
       background-color: #fff;
       border: none;
       width: 100px;
@@ -129,11 +124,11 @@ const handleRegisterSubmit = () => {
       font-weight: bold;
       cursor: pointer;
    }
+}
 
-   .error-message {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-   }
+.error-message {
+   color: red;
+   font-size: 14px;
+   margin-top: 10px;
 }
 </style>
