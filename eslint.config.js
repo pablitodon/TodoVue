@@ -1,17 +1,29 @@
-import js from '@eslint/js';
+import eslint from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginVue from 'eslint-plugin-vue';
-import ts from 'typescript-eslint';
+import globals from 'globals';
+import typescriptEslint from 'typescript-eslint';
 
-export default ts.config(
-   js.configs.recommended,
-   ...ts.configs.recommended,
-   ...eslintPluginVue.configs['flat/recommended'],
-   {
-      files: ['*.vue', '**/*.vue'],
-      languageOptions: {
-         parserOptions: {
-            parser: '@typescript-eslint/parser',
-         },
+export default typescriptEslint.config(
+  { ignores: ['*.d.ts', '**/coverage', '**/dist'] },
+  {
+    extends: [
+      eslint.configs.recommended,
+      ...typescriptEslint.configs.recommended,
+      ...eslintPluginVue.configs['flat/recommended'],
+    ],
+    files: ['**/*.{ts,vue}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.browser,
+      parserOptions: {
+        parser: typescriptEslint.parser,
       },
-   }
+    },
+    rules: {
+      
+    },
+  },
+  eslintConfigPrettier
 );
