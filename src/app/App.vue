@@ -1,11 +1,11 @@
 <template>
    <div class="wrapp">
-      <Register />
+      <UserRegister />
    </div>
 </template>
 
 <script setup>
-import Register from './features/User/Register.vue';
+import UserRegister from '../entites/user/ui/RegisterForm.vue';
 </script>
 
 <style lang="scss">

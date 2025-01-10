@@ -1,32 +1,17 @@
-import ts from '@typescript-eslint/parser'; // Парсер TypeScript для ESLint
-import vue from 'eslint-plugin-vue'; // Плагин ESLint для Vue
-import importPlugin from 'eslint-plugin-import'; // Плагин ESLint для импортов
+import js from '@eslint/js';
+import eslintPluginVue from 'eslint-plugin-vue';
+import ts from 'typescript-eslint';
 
-/** @type {import('eslint').Linter.Config} */
-export default [
+export default ts.config(
+   js.configs.recommended,
+   ...ts.configs.recommended,
+   ...eslintPluginVue.configs['flat/recommended'],
    {
-      ignores: ['dist/**/*', 'node_modules/**/*'],
-   },
-   {
-      files: ['**/*.{js,mjs,cjs,ts,vue}'],
+      files: ['*.vue', '**/*.vue'],
       languageOptions: {
-         parser: ts,
          parserOptions: {
-            ecmaVersion: 'latest',
-            sourceType: 'module',
-            tsconfigRoot: './',
-            extraFileExtensions: ['vue'],
+            parser: '@typescript-eslint/parser',
          },
-         globals: {},
       },
-      plugins: {
-         vue,
-         import: importPlugin,
-      },
-      rules: {
-         'vue/script-setup-uses-vars': 'error',
-         'vue/no-unused-vars': 'warn',
-         'vue/no-multiple-template-root': 'off',
-      },
-   },
-];
+   }
+);

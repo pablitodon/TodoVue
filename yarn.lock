@@ -475,22 +475,14 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@typescript-eslint/eslint-plugin@8.19.1":
-  version "8.19.1"
-  resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.19.1.tgz"
-  integrity sha512-tJzcVyvvb9h/PB96g30MpxACd9IrunT7GF9wfA9/0TJ1LxGOJx1TdPzSbBBnNED7K9Ka8ybJsnEpiXPktolTLg==
+"@types/vue@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/vue/-/vue-2.0.0.tgz#ec77b3d89591deb9ca5cb052368aa9c32be088e7"
+  integrity sha512-WDElkBv/o4lVwu6wYHB06AXs4Xo2fwDjJUpvPRc1QQdzkUSiGFjrYuSCy8raxLE5FObgKq8ND7R5gSZTFLK60w==
   dependencies:
-    "@eslint-community/regexpp" "^4.10.0"
-    "@typescript-eslint/scope-manager" "8.19.1"
-    "@typescript-eslint/type-utils" "8.19.1"
-    "@typescript-eslint/utils" "8.19.1"
-    "@typescript-eslint/visitor-keys" "8.19.1"
-    graphemer "^1.4.0"
-    ignore "^5.3.1"
-    natural-compare "^1.4.0"
-    ts-api-utils "^2.0.0"
+    vue "*"
 
-"@typescript-eslint/eslint-plugin@^8.19.1":
+"@typescript-eslint/eslint-plugin@8.19.1", "@typescript-eslint/eslint-plugin@^8.19.1":
   version "8.19.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.19.1.tgz#5f26c0a833b27bcb1aa402b82e76d3b8dda0b247"
   integrity sha512-tJzcVyvvb9h/PB96g30MpxACd9IrunT7GF9wfA9/0TJ1LxGOJx1TdPzSbBBnNED7K9Ka8ybJsnEpiXPktolTLg==
@@ -505,18 +497,7 @@
     natural-compare "^1.4.0"
     ts-api-utils "^2.0.0"
 
-"@typescript-eslint/parser@8.19.1":
-  version "8.19.1"
-  resolved "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-8.19.1.tgz"
-  integrity sha512-67gbfv8rAwawjYx3fYArwldTQKoYfezNUT4D5ioWetr/xCrxXxvleo3uuiFuKfejipvq+og7mjz3b0G2bVyUCw==
-  dependencies:
-    "@typescript-eslint/scope-manager" "8.19.1"
-    "@typescript-eslint/types" "8.19.1"
-    "@typescript-eslint/typescript-estree" "8.19.1"
-    "@typescript-eslint/visitor-keys" "8.19.1"
-    debug "^4.3.4"
-
-"@typescript-eslint/parser@^8.19.1":
+"@typescript-eslint/parser@8.19.1", "@typescript-eslint/parser@^8.19.1":
   version "8.19.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-8.19.1.tgz#b836fcfe7a704c8c65f5a50e5b0ff8acfca5c21b"
   integrity sha512-67gbfv8rAwawjYx3fYArwldTQKoYfezNUT4D5ioWetr/xCrxXxvleo3uuiFuKfejipvq+og7mjz3b0G2bVyUCw==
@@ -2576,7 +2557,7 @@ vue-tsc@^2.2.0:
     "@volar/typescript" "~2.4.11"
     "@vue/language-core" "2.2.0"
 
-vue@^3.5.13:
+vue@*, vue@^3.5.13:
   version "3.5.13"
   resolved "https://registry.npmjs.org/vue/-/vue-3.5.13.tgz"
   integrity sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==
