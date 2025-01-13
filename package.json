@@ -22,10 +22,11 @@
       "yarn lint:fix",
       "git add"
     ],
-    "*.{css,scss,vue}": [
+    "*.{css,scss,vue}": [ 
       "yarn lint:style --fix",
       "git add"
     ],
+    
     "node_modules /**/*": "skip"
   },
   "dependencies": {
