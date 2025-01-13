@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint src/**/*.{ts,vue}",
     "lint:fix": "eslint src/**/*.{ts,vue} --fix",
+    "lint:style": "stylelint **/*.vue",
     "prepare": "husky install"
   },
   "husky": {
@@ -21,7 +22,11 @@
       "yarn lint:fix",
       "git add"
     ],
-    "node_modules /**/*":"skip"
+    "*.{css,scss,vue}": [
+      "yarn lint:style --fix",
+      "git add"
+    ],
+    "node_modules /**/*": "skip"
   },
   "dependencies": {
     "global": "^4.4.0",
@@ -29,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.4.0",
     "@types/vue": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
@@ -43,14 +49,22 @@
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "postcss-html": "^1.7.0",
     "prettier": "^3.4.2",
     "sass": "^1.83.1",
     "sass-loader": "^16.0.4",
+    "stylelint": "^16.13.0",
+    "stylelint-config-recommended": "^15.0.0",
+    "stylelint-config-recommended-scss": "^14.1.0",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-scss": "^6.10.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.19.1",
     "vite": "^6.0.5",
+    "vite-plugin-stylelint": "^6.0.0",
     "vue-eslint-parser": "^9.4.3",
-    "vue-tsc": "^2.2.0",
-    "lint-staged": "^15.2.11"
+    "vue-tsc": "^2.2.0"
   }
 }
