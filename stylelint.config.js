@@ -7,8 +7,6 @@ export default {
   "overrides": [
     {
       "files": ["*.vue", "**/*.vue"],
-      "rules": {
-      }
     }
   ]
 }
