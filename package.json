@@ -21,8 +21,16 @@
       "yarn lint:fix",
       "git add"
     ],
+
+    "*.{css,scss,vue}": [ 
+      "yarn lint:style --fix",
+      "git add"
+    ],
+
     "node_modules /**/*":"skip"
   },
+
+
   "dependencies": {
     "global": "^4.4.0",
     "vue": "^3.5.13"
