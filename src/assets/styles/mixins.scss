@@ -1,0 +1,22 @@
+@mixin button-styles-form($bg-color, $hover-shadow) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: var(--radius-8);
+  font-weight: 700;
+  font-size: 20px;
+  padding: 15px;
+  border: none;
+  background-color: $bg-color;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    border-width 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: $hover-shadow;
+  }
+}
