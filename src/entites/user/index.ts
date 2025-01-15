@@ -1,3 +1,3 @@
-import UserRegister from './ui/RegisterForm.vue';
+import AuthForm from './ui/AuthForm.vue';
 
-export { UserRegister };
+export { AuthForm };
