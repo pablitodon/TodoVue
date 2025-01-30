@@ -1,10 +1,10 @@
 <template>
   <div class="wrapp">
-    <form class="register-form" @submit.prevent="handleSubmit">
-      <fieldset class="register-form__fieldset">
-        <legend class="register-form__legend">Регистрация</legend>
-        <div class="register-form__field">
-          <label class="register-form__label" for="name">Логин</label>
+    <form class="login-form" @submit.prevent="handleSubmit">
+      <fieldset class="login-form__fieldset">
+        <legend class="login-form__legend">Вход</legend>
+        <div class="login-form__field">
+          <label class="login-form__label" for="name">Логин</label>
           <VInput
             v-model="formData.login"
             type="text"
@@ -12,8 +12,8 @@
             :invalid="!isLoginValid"
           />
         </div>
-        <div class="register-form__field">
-          <label class="register-form__label" for="password">Пароль</label>
+        <div class="login-form__field">
+          <label class="login-form__label" for="password">Пароль</label>
           <div class="password__field">
             <VInput
               v-model="formData.password"
@@ -21,6 +21,7 @@
               :invalid="!isPasswordValid"
               placeholder="Введите пароль"
             />
+
             <img
               :src="eye.eyeLight"
               class="eye__icon"
@@ -32,11 +33,8 @@
         <VButton target="submit" styleType="rounded-8" type="submit">
           Продолжить
         </VButton>
-        <div class="register-form__back">
-          <VButton>
-            <img :src="arrow.arrowBack" alt="Back Arrow" />
-            Назад
-          </VButton>
+        <div class="login-form__back">
+          <VButton>Зарегистрироваться</VButton>
         </div>
       </fieldset>
     </form>
@@ -45,21 +43,24 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { eye, arrow } from '../../../../assets/svg/index'; //arrow
+import { eye } from '../../../../assets/svg/index';
+
 import VButton from '../../../../shared/VButton.vue';
 import VInput from '../../../../shared/VInput.vue';
 
-interface IFormData {
-  login: string;
-  password: string;
-}
+import { IUser } from '../../../../entites/user/user.contract';
+import {
+  resetFormData,
+  validateLogin,
+  validatePassword,
+} from '../../../../entites/user/user.model';
+import { loginUser } from '../../../../entites/user/user.api';
 
 const showPassword = ref<boolean>(false);
-const formData = ref<IFormData>({
+const formData = ref<IUser>({
   login: '',
   password: '',
 });
-
 const isLoginValid = ref<boolean>(true);
 const isPasswordValid = ref<boolean>(true);
 
@@ -67,26 +68,18 @@ const toggleVisibilityPassword = () => {
   showPassword.value = !showPassword.value;
 };
 
-const validateLogin = () => {
-  isLoginValid.value = formData.value.login.length > 0;
-};
-
-const validatePassword = () => {
-  isPasswordValid.value = formData.value.password.length >= 6;
-};
-
 const handleSubmit = () => {
-  validateLogin();
-  validatePassword();
+  isLoginValid.value = validateLogin(formData.value.login);
+  isPasswordValid.value = validatePassword(formData.value.password);
 
   if (!isLoginValid.value || !isPasswordValid.value) {
     alert('Пожалуйста, заполните все поля корректно!');
     return;
   }
-  console.log('Форма отправлена:', formData.value);
+  loginUser(formData.value.login, formData.value.password);
+  resetFormData(formData.value);
 };
 </script>
-
 <style scoped lang="scss">
 @use '../../../../assets/styles/variables';
 
@@ -107,7 +100,7 @@ const handleSubmit = () => {
   }
 }
 
-.register-form {
+.login-form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -134,6 +127,8 @@ const handleSubmit = () => {
   &__field {
     flex-direction: column;
     padding: 20px 0;
+
+    // margin-bottom: 50px;
   }
 
   &__label {
