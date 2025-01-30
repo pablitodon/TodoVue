@@ -27,7 +27,7 @@ export const loginUser = async (username: string, password: string) => {
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.error('Ошибка регистрации пользователя:', error.message);
+      console.error('Ошибка входа пользователя:', error.message);
     }
   }
 };
