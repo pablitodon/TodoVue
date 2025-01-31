@@ -4,10 +4,9 @@
     :class="[
       `btn-${props.target}`,
       `btn-${props.styleType}`,
-      { disabled: props.disabled || props.invalid },
+      { invalid: props.invalid },
     ]"
     :type="props.type"
-    :disabled="props.disabled || props.invalid"
   >
     <slot></slot>
   </button>
@@ -34,18 +33,18 @@ const props = defineProps<{
   border: none;
   cursor: pointer;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1rem;
   background-color: var(--white);
 
-  &.disabled {
+  &.invalid {
     background-color: var(--grey-stop);
     cursor: not-allowed;
-    opacity: 0.6;
+    color: var(--black);
   }
 
   &-submit {
     width: 100%;
-    padding: 15px 0;
+    padding: 1rem 0;
     background-color: var(--green);
 
     &:hover {
@@ -57,7 +56,7 @@ const props = defineProps<{
 
   &-dashboard-button {
     background-color: var(--green);
-    padding: 15px 25px;
+    padding: 1rem 1.6rem;
   }
 
   &-rectangle {

@@ -29,7 +29,12 @@
             />
           </div>
         </div>
-        <VButton target="submit" styleType="rounded-8" type="submit">
+        <VButton
+          target="submit"
+          styleType="rounded-8"
+          type="submit"
+          :invalid="!isLoginValid || !isPasswordValid"
+        >
           Продолжить
         </VButton>
         <div class="register-form__back">
@@ -91,15 +96,20 @@ const handleSubmit = () => {
   justify-content: center;
   margin: 0 auto;
   align-items: center;
-  max-width: 1440px;
+  max-width: 100%;
   height: auto;
   min-height: 100vh;
   background: var(--grey-bg);
-  border: 1px solid #000;
-  border-radius: 35px;
+  border: 0.0625rem solid var(--black);
+  border-radius: 2rem;
+  padding: 1rem;
 
   @media (width <= 1024px) {
-    padding: 2vh 0;
+    padding: 2rem;
+  }
+
+  @media (width <= 768px) {
+    padding: 1rem;
   }
 }
 
@@ -108,53 +118,99 @@ const handleSubmit = () => {
   flex-direction: column;
   justify-content: space-between;
   background: var(--bg-form);
-  max-width: 516px;
+  max-width: 32.25rem;
   height: auto;
   border-radius: var(--radius-32);
-  box-shadow: 0 4px 4px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 0.25rem 0.25rem 0 rgb(0 0 0 / 10%);
   box-sizing: border-box;
-  padding: 40px 0;
+  padding: 2.5rem 0;
+
+  @media (width <= 1024px) {
+    padding: 2rem 0;
+  }
+
+  @media (width <= 768px) {
+    padding: 1.5rem 0.32rem;
+  }
 
   &__fieldset {
     border: none;
-    padding: 20px;
+    padding: 1.25rem;
+
+    @media (width <= 1024px) {
+      padding: 0.9375rem;
+    }
+
+    @media (width <= 768px) {
+      padding: 0.625rem;
+    }
   }
 
   &__legend {
     text-align: center;
-    width: 100%;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 2rem;
+
+    @media (width <= 1024px) {
+      font-size: 1.8rem;
+    }
+
+    @media (width <= 768px) {
+      font-size: 1.6rem;
+    }
   }
 
   &__field {
-    flex-direction: column;
-    padding: 20px 0;
+    padding: 1.25rem 0;
+
+    @media (width <= 1024px) {
+      padding: 0.625rem 0;
+    }
+
+    @media (width <= 768px) {
+      padding: 0.625rem 0;
+    }
   }
 
   &__label {
     font-weight: 600;
+
+    @media (width <= 768px) {
+      font-size: 0.9rem;
+    }
   }
 
   .password__field {
     position: relative;
-    margin-bottom: 38px;
+    margin-bottom: 2rem;
+
+    @media (width <= 768px) {
+      margin-bottom: 1.5rem;
+    }
   }
 
   .eye__icon {
     position: absolute;
-    right: 5px;
+    right: 0.3125rem;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    width: 40px;
-    height: 34px;
-    margin: 5px;
+    width: 2rem;
+    height: 1.5rem;
+
+    @media (width <= 768px) {
+      width: 1.5rem;
+      height: 1.2rem;
+    }
   }
 
   &__back {
     cursor: pointer;
-    margin-top: 100px;
+    margin-top: 5rem;
+
+    @media (width <= 768px) {
+      margin-top: 1.25rem;
+    }
   }
 }
 </style>
