@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <RegisterUser />
-  </div>
+  <RegisterUser />
 </template>
 
 <script setup>
-import { RegisterUser } from '../features/user/ui/register-user-ui/index.ts';
+import { RegisterUser } from '~/features/user/ui/register-user-ui/index.ts';
 </script>
 
 <style lang="scss"></style>

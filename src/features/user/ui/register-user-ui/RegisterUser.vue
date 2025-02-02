@@ -50,18 +50,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { eye, arrow } from '../../../../assets/svg/index';
-
-import VButton from '../../../../shared/VButton.vue';
-import VInput from '../../../../shared/VInput.vue';
-
-import { IUser } from '../../../../entites/user/user.contract';
+import { eye, arrow } from '~/assets/svg/index';
+import { IUser } from '~/entites/user/user.contract';
+import { registerUser } from '~/entites/user/user.api';
+import VInput from '~/shared/VInput.vue';
+import VButton from '~/shared/VButton.vue';
 import {
   resetFormData,
   validateLogin,
   validatePassword,
-} from '../../../../entites/user/user.model';
-import { registerUser } from '../../../../entites/user/user.api';
+} from '~/entites/user/user.model';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
@@ -89,12 +87,11 @@ const handleSubmit = () => {
 </script>
 
 <style scoped lang="scss">
-@use '../../../../assets/styles/variables';
+@use '~/assets/styles/variables';
 
 .wrapp {
   display: flex;
   justify-content: center;
-  margin: 0 auto;
   align-items: center;
   max-width: 100%;
   height: auto;
@@ -124,6 +121,7 @@ const handleSubmit = () => {
   box-shadow: 0 0.25rem 0.25rem 0 rgb(0 0 0 / 10%);
   box-sizing: border-box;
   padding: 2.5rem 0;
+  margin: 0 auto;
 
   @media (width <= 1024px) {
     padding: 2rem 0;
@@ -192,7 +190,7 @@ const handleSubmit = () => {
   .eye__icon {
     position: absolute;
     right: 0.3125rem;
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
     cursor: pointer;
     width: 2rem;

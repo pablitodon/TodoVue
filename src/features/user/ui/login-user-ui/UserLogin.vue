@@ -43,18 +43,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { eye } from '../../../../assets/svg/index';
+import { eye } from '~/assets/svg/index';
 
-import VButton from '../../../../shared/VButton.vue';
-import VInput from '../../../../shared/VInput.vue';
+import VButton from '~/shared/VButton.vue';
+import VInput from '~/shared/VInput.vue';
 
-import { IUser } from '../../../../entites/user/user.contract';
+import { IUser } from '~/entites/user/user.contract';
 import {
   resetFormData,
   validateLogin,
   validatePassword,
-} from '../../../../entites/user/user.model';
-import { loginUser } from '../../../../entites/user/user.api';
+} from '~/entites/user/user.model';
+import { loginUser } from '~/entites/user/user.api';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
@@ -73,7 +73,6 @@ const handleSubmit = () => {
   isPasswordValid.value = validatePassword(formData.value.password);
 
   if (!isLoginValid.value || !isPasswordValid.value) {
-    alert('Пожалуйста, заполните все поля корректно!');
     return;
   }
   loginUser(formData.value.login, formData.value.password);
@@ -81,7 +80,7 @@ const handleSubmit = () => {
 };
 </script>
 <style scoped lang="scss">
-@use '../../../../assets/styles/variables';
+@use '~/assets/styles/variables';
 
 .wrapp {
   display: flex;
