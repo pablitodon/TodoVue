@@ -32,7 +32,7 @@ const props = defineProps<{
   color: #000;
   border: none;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: var(--font-weight-600);
   font-size: 1rem;
   background-color: var(--white);
 

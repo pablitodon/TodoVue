@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapp">
+  <LoginRegisterWrapper>
     <form class="register-form" @submit.prevent="handleSubmit">
       <fieldset class="register-form__fieldset">
         <legend class="register-form__legend">Регистрация</legend>
@@ -45,7 +45,7 @@
         </div>
       </fieldset>
     </form>
-  </div>
+  </LoginRegisterWrapper>
 </template>
 
 <script setup lang="ts">
@@ -53,6 +53,7 @@ import { ref } from 'vue';
 import { eye, arrow } from '~/assets/svg/index';
 import { IUser } from '~/entites/user/user.contract';
 import { registerUser } from '~/entites/user/user.api';
+import LoginRegisterWrapper from '~/shared/LoginRegisterWrapper.vue';
 import VInput from '~/shared/VInput.vue';
 import VButton from '~/shared/VButton.vue';
 import {
@@ -60,7 +61,6 @@ import {
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
-
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
   login: '',
@@ -78,7 +78,6 @@ const handleSubmit = () => {
   isPasswordValid.value = validatePassword(formData.value.password);
 
   if (!isLoginValid.value || !isPasswordValid.value) {
-    alert('Пожалуйста, заполните все поля корректно!');
     return;
   }
   registerUser(formData.value.login, formData.value.password);
@@ -87,92 +86,70 @@ const handleSubmit = () => {
 </script>
 
 <style scoped lang="scss">
-@use '~/assets/styles/variables';
-
-.wrapp {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 100%;
-  height: auto;
-  min-height: 100vh;
-  background: var(--grey-bg);
-  border: 0.0625rem solid var(--black);
-  border-radius: 2rem;
-  padding: 1rem;
-
-  @media (width <= 1024px) {
-    padding: 2rem;
-  }
-
-  @media (width <= 768px) {
-    padding: 1rem;
-  }
-}
+@import '~/assets/styles/mixins';
 
 .register-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background: var(--bg-form);
-  max-width: 32.25rem;
+  width: 32.25rem;
+  max-width: 100%;
   height: auto;
+  max-height: 85vh;
   border-radius: var(--radius-32);
-  box-shadow: 0 0.25rem 0.25rem 0 rgb(0 0 0 / 10%);
+  box-shadow: var(--shadow-form);
   box-sizing: border-box;
   padding: 2.5rem 0;
-  margin: 0 auto;
 
-  @media (width <= 1024px) {
-    padding: 2rem 0;
+  @include respond-to-desktop {
+    max-width: 25rem;
   }
 
-  @media (width <= 768px) {
-    padding: 1.5rem 0.32rem;
+  @include respond-to-tablet {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 6.5rem;
+  }
+
+  @include respond-to-phone {
+    padding: 1rem;
+    max-width: 100%;
   }
 
   &__fieldset {
     border: none;
     padding: 1.25rem;
 
-    @media (width <= 1024px) {
-      padding: 0.9375rem;
-    }
+    // @include respond-to-laptop {
+    //   padding: 0.5rem;
+    // }
 
-    @media (width <= 768px) {
-      padding: 0.625rem;
+    @include respond-to-phone {
+      padding: 0.75rem;
     }
   }
 
   &__legend {
     text-align: center;
-    font-weight: 600;
     font-size: 2rem;
 
-    @media (width <= 1024px) {
+    @include respond-to-laptop {
       font-size: 1.8rem;
+      padding-top: 1.5rem;
     }
 
-    @media (width <= 768px) {
-      font-size: 1.6rem;
+    @include respond-to-tablet {
+      font-size: 2rem;
     }
   }
 
   &__field {
     padding: 1.25rem 0;
-
-    @media (width <= 1024px) {
-      padding: 0.625rem 0;
-    }
-
-    @media (width <= 768px) {
-      padding: 0.625rem 0;
-    }
   }
 
   &__label {
-    font-weight: 600;
-
     @media (width <= 768px) {
       font-size: 0.9rem;
     }
@@ -181,10 +158,6 @@ const handleSubmit = () => {
   .password__field {
     position: relative;
     margin-bottom: 2rem;
-
-    @media (width <= 768px) {
-      margin-bottom: 1.5rem;
-    }
   }
 
   .eye__icon {
@@ -195,20 +168,11 @@ const handleSubmit = () => {
     cursor: pointer;
     width: 2rem;
     height: 1.5rem;
-
-    @media (width <= 768px) {
-      width: 1.5rem;
-      height: 1.2rem;
-    }
   }
 
   &__back {
     cursor: pointer;
     margin-top: 5rem;
-
-    @media (width <= 768px) {
-      margin-top: 1.25rem;
-    }
   }
 }
 </style>
