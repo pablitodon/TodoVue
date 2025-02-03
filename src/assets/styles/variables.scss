@@ -1,15 +1,15 @@
 :root {
   /* colors */
-  --black: #000; /* Черный цвет */
-  --grey-toggle: #d9d9d9; /* Серый цвет для переключателей */
-  --grey-bg: #f0f0f0; /* Светло-серый фон */
-  --white: #fff; /* Белый цвет */
-  --bg-form: #fffcfc; /* Цвет фона формы */
-  --grey-input: rgb(232 231 231 / 57%); /* Полупрозрачный серый для ввода */
-  --green: rgb(0 219 150 / 28%); /* Полупрозрачный зеленый */
-  --green-hover: rgb(0 219 150 / 45%); /* Полупрозрачный зеленый hover */
-  --grey-stop: rgb(44 62 56 / 28%); /* Полупрозрачный серый форма */
-  --rose-invalid: rgb(218 164 164 / 57%); /* Розовый цвет неправильная форма */
+  --black: #000;
+  --grey-toggle: #d9d9d9;
+  --grey-bg: #f0f0f0;
+  --white: #fff;
+  --bg-form: #fffcfc;
+  --grey-input: rgb(232 231 231 / 57%);
+  --green: rgb(0 219 150 / 28%);
+  --green-hover: rgb(0 219 150 / 45%);
+  --grey-stop: rgb(44 62 56 / 28%);
+  --rose-invalid: rgb(218 164 164 / 57%);
 
   /* radius */
   --radius-8: 8px;
@@ -18,5 +18,6 @@
   --radius-0: 0px;
 
   /* shadow */
-  --shadow-green-button: 0 0 10px rgb(44 154 88 / 76.2%); /* Используйте rgba вместо rgb с alpha */
+  --shadow-green-button: 0 0 10px rgb(44 154 88 / 76.2%);
+  --shadow-form: 0 0.25rem 0.25rem 0 rgb(0 0 0 / 10%);
 }
