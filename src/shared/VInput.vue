@@ -23,7 +23,6 @@ const emit = defineEmits<{
 
 const updateValue = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  console.log('Invalid:', props.invalid);
   emit('update:modelValue', target.value);
 };
 </script>
@@ -37,21 +36,21 @@ input {
   margin-top: 10px;
   font-weight: 700;
   font-size: 18px;
-  border: none;
+  border: 1px solid transparent;
   transition:
-    border-color 0.3s ease,
     box-shadow 0.3s ease,
-    border-width 0.3s ease;
+    border-width 0.3s ease,
+    background-color 0.3s ease;
 
   &:focus {
     outline: none;
-    border-width: 1px;
-    box-shadow: 0 0 5px rgb(65 69 66 / 44.1%);
+    border: 1px solid var(--grey);
+    box-shadow: 0 0 10px var(--focus-shadow-color);
+    background-color: var(--white);
   }
 
   &.invalid {
     background-color: var(--rose-invalid);
-    box-shadow: 0 0 5px rgb(255 0 0 / 44.1%);
   }
 }
 </style>

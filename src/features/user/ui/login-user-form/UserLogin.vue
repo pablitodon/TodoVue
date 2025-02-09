@@ -4,16 +4,28 @@
       <fieldset class="login-form__fieldset">
         <legend class="login-form__legend">Вход</legend>
         <div class="login-form__field">
-          <label class="login-form__label" for="name">Логин</label>
+          <label
+            class="login-form__label"
+            for="name"
+            :class="{ invalid: !isLoginValid }"
+          >
+            Логин
+          </label>
           <VInput
-            v-model="formData.login"
+            v-model="formData.username"
             type="text"
             placeholder="ololo@gmail.com"
             :invalid="!isLoginValid"
           />
         </div>
         <div class="login-form__field">
-          <label class="login-form__label" for="password">Пароль</label>
+          <label
+            class="login-form__label"
+            for="password"
+            :class="{ invalid: !isPasswordValid }"
+          >
+            Пароль
+          </label>
           <div class="password__field">
             <VInput
               v-model="formData.password"
@@ -21,7 +33,6 @@
               :invalid="!isPasswordValid"
               placeholder="Введите пароль"
             />
-
             <img
               :src="eye.eyeLight"
               class="eye__icon"
@@ -48,17 +59,18 @@ import { eye } from '~/assets/svg/index';
 import VButton from '~/shared/VButton.vue';
 import VInput from '~/shared/VInput.vue';
 import LoginRegisterWrapper from '~/shared/LoginRegisterWrapper.vue';
-import { IUser } from '~/entites/user/user.contract';
+import { IUser } from '~/entites/user/user.types';
 import {
   resetFormData,
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
 import { loginUser } from '~/entites/user/user.api';
+import { useToast } from '~/shared/composables/useToast';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
-  login: '',
+  username: '',
   password: '',
 });
 const isLoginValid = ref<boolean>(true);
@@ -69,17 +81,19 @@ const toggleVisibilityPassword = () => {
 };
 
 const handleSubmit = () => {
-  isLoginValid.value = validateLogin(formData.value.login);
+  isLoginValid.value = validateLogin(formData.value.username);
   isPasswordValid.value = validatePassword(formData.value.password);
   if (!isLoginValid.value || !isPasswordValid.value) {
+    useToast('Заполните правильно все поля.', 'error');
     return;
   }
-  loginUser(formData.value.login, formData.value.password);
+
+  loginUser(formData.value);
   resetFormData(formData.value);
 };
 </script>
 <style scoped lang="scss">
-@import '~/assets/styles/mixins';
+@use '~/assets/styles/mixins' as *;
 
 .login-form {
   display: flex;
@@ -103,9 +117,7 @@ const handleSubmit = () => {
   }
 
   @include respond-to-tablet {
-    max-width: 80%;
     margin: 0 auto;
-    padding: 2rem;
     margin-top: 6.5rem;
   }
 
@@ -146,7 +158,20 @@ const handleSubmit = () => {
   }
 
   &__label {
-    @media (width <= 768px) {
+    &.invalid {
+      color: var(--rose-words);
+      font-weight: bold;
+    }
+
+    @include respond-to-laptop {
+      font-size: 1.3rem;
+    }
+
+    @include respond-to-tablet {
+      font-size: 1.1rem;
+    }
+
+    @include respond-to-phone {
       font-size: 0.9rem;
     }
   }

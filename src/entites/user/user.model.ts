@@ -1,4 +1,4 @@
-import { IUser } from './user.contract';
+import { IUser } from './user.types';
 
 export const validateLogin = (login: string): boolean => {
   return login.length > 0;
@@ -9,6 +9,6 @@ export const validatePassword = (password: string): boolean => {
 };
 
 export const resetFormData = (formData: IUser): void => {
-  formData.login = '';
+  formData.username = '';
   formData.password = '';
 };

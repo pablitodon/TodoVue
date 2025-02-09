@@ -46,6 +46,7 @@ const props = defineProps<{
     width: 100%;
     padding: 1rem 0;
     background-color: var(--green);
+    transition: background-color 1s ease;
 
     &:hover {
       background-color: var(--green-hover);

@@ -4,16 +4,26 @@
       <fieldset class="register-form__fieldset">
         <legend class="register-form__legend">Регистрация</legend>
         <div class="register-form__field">
-          <label class="register-form__label">Логин</label>
+          <label
+            class="register-form__label"
+            :class="{ invalid: !isLoginValid }"
+          >
+            Логин
+          </label>
           <VInput
-            v-model="formData.login"
+            v-model="formData.username"
             type="text"
             placeholder="ololo@gmail.com"
             :invalid="!isLoginValid"
           />
         </div>
         <div class="register-form__field">
-          <label class="register-form__label">Пароль</label>
+          <label
+            class="register-form__label"
+            :class="{ invalid: !isPasswordValid }"
+          >
+            Пароль
+          </label>
           <div class="password__field">
             <VInput
               v-model="formData.password"
@@ -51,7 +61,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { eye, arrow } from '~/assets/svg/index';
-import { IUser } from '~/entites/user/user.contract';
+import { IUser } from '~/entites/user/user.types';
 import { registerUser } from '~/entites/user/user.api';
 import LoginRegisterWrapper from '~/shared/LoginRegisterWrapper.vue';
 import VInput from '~/shared/VInput.vue';
@@ -61,9 +71,11 @@ import {
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
+import { useToast } from '~/shared/composables/useToast';
+
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
-  login: '',
+  username: '',
   password: '',
 });
 const isLoginValid = ref<boolean>(true);
@@ -74,19 +86,20 @@ const toggleVisibilityPassword = () => {
 };
 
 const handleSubmit = () => {
-  isLoginValid.value = validateLogin(formData.value.login);
+  isLoginValid.value = validateLogin(formData.value.username);
   isPasswordValid.value = validatePassword(formData.value.password);
 
   if (!isLoginValid.value || !isPasswordValid.value) {
+    useToast('Заполните все поля', 'error');
     return;
   }
-  registerUser(formData.value.login, formData.value.password);
+  registerUser(formData.value);
   resetFormData(formData.value);
 };
 </script>
 
 <style scoped lang="scss">
-@import '~/assets/styles/mixins';
+@use '~/assets/styles/mixins' as *;
 
 .register-form {
   display: flex;
@@ -106,15 +119,17 @@ const handleSubmit = () => {
     max-width: 25rem;
   }
 
+  @include respond-to-laptop {
+    font-size: 1.8rem;
+    padding: 1.5rem 0;
+  }
+
   @include respond-to-tablet {
-    max-width: 80%;
     margin: 0 auto;
-    padding: 2rem;
     margin-top: 6.5rem;
   }
 
   @include respond-to-phone {
-    padding: 1rem;
     max-width: 100%;
   }
 
@@ -122,9 +137,9 @@ const handleSubmit = () => {
     border: none;
     padding: 1.25rem;
 
-    // @include respond-to-laptop {
-    //   padding: 0.5rem;
-    // }
+    @include respond-to-desktop {
+      padding: 1rem;
+    }
 
     @include respond-to-phone {
       padding: 0.75rem;
@@ -150,7 +165,20 @@ const handleSubmit = () => {
   }
 
   &__label {
-    @media (width <= 768px) {
+    &.invalid {
+      color: var(--rose-words);
+      font-weight: bold;
+    }
+
+    @include respond-to-laptop {
+      font-size: 1.3rem;
+    }
+
+    @include respond-to-tablet {
+      font-size: 1.1rem;
+    }
+
+    @include respond-to-phone {
       font-size: 0.9rem;
     }
   }
@@ -171,8 +199,8 @@ const handleSubmit = () => {
   }
 
   &__back {
+    margin: 2rem 0;
     cursor: pointer;
-    margin-top: 5rem;
   }
 }
 </style>
