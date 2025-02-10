@@ -9,7 +9,16 @@
 
 body {
   font-family: var(--font-style);
+  font-weight: var(--font-weight-600);
+  background: var(--grey-bg);
 }
 
-// классы к которым можно обрааться во всемприложени.
-// visibleHidden посмотреть
+.Toastify__toast {
+  padding: 0.8rem !important;
+  border-radius: var(--radius-10) !important;
+  font-family: var(--font-style) !important;
+}
+.Toastify__toast-icon {
+  margin-inline-end: 30px !important;
+  width: 2.5rem !important;
+}

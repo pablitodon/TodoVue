@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <AuthForm :isLogin="false" />
-  </div>
+  <RegisterUser />
 </template>
 
 <script setup>
-import AuthForm from '../entites/user/ui/AuthForm.vue';
+import { RegisterUser } from '~/features/user/ui/register-user-form';
 </script>
 
 <style lang="scss"></style>
