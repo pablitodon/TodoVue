@@ -93,7 +93,7 @@ const handleSubmit = () => {
 };
 </script>
 <style scoped lang="scss">
-@use '~/assets/styles/mixins' as *;
+@use '~/assets/styles/mixins' as mixins;
 
 .login-form {
   display: flex;
@@ -108,20 +108,20 @@ const handleSubmit = () => {
   box-sizing: border-box;
   padding: 2.5rem 0;
 
-  @include respond-to-desktop {
+  @include mixins.respond-to-desktop {
     max-width: 25rem;
   }
 
-  @include respond-to-laptop {
+  @include mixins.respond-to-laptop {
     max-width: 25rem;
   }
 
-  @include respond-to-tablet {
+  @include mixins.respond-to-tablet {
     margin: 0 auto;
     margin-top: 6.5rem;
   }
 
-  @include respond-to-phone {
+  @include mixins.respond-to-phone {
     padding: 1rem;
     max-width: 100%;
   }
@@ -130,11 +130,11 @@ const handleSubmit = () => {
     border: none;
     padding: 1.25rem;
 
-    @include respond-to-laptop {
+    @include mixins.respond-to-laptop {
       padding: 1rem;
     }
 
-    @include respond-to-phone {
+    @include mixins.respond-to-phone {
       padding: 0.75rem;
     }
   }
@@ -143,12 +143,12 @@ const handleSubmit = () => {
     text-align: center;
     font-size: 2rem;
 
-    @include respond-to-laptop {
+    @include mixins.respond-to-laptop {
       font-size: 1.8rem;
       padding-top: 0.5rem;
     }
 
-    @include respond-to-tablet {
+    @include mixins.respond-to-tablet {
       font-size: 2rem;
     }
   }
@@ -163,15 +163,15 @@ const handleSubmit = () => {
       font-weight: bold;
     }
 
-    @include respond-to-laptop {
+    @include mixins.respond-to-laptop {
       font-size: 1.3rem;
     }
 
-    @include respond-to-tablet {
+    @include mixins.respond-to-tablet {
       font-size: 1.1rem;
     }
 
-    @include respond-to-phone {
+    @include mixins.respond-to-phone {
       font-size: 0.9rem;
     }
   }
