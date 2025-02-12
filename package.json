@@ -1,72 +1,13 @@
 {
-  "name": "todo_vue",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
-    "lint": "eslint src/**/*.{ts,vue}",
-    "lint:fix": "eslint src/**/*.{ts,vue} --fix",
-    "lint:style": "stylelint src/**/*.{css,scss,vue}",
-    "prepare": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.vue": [
-      "eslint --fix",
-      "stylelint --fix **/*.vue",
-      "prettier --write"
+    "name": "todo-crm-app",
+    "private": true,
+    "workspaces": [
+      "packages/*"
     ],
-    "node_modules/**/*": "skip"
-  },
-  "dependencies": {
-    "axios": "^1.7.9",
-    "global": "^4.4.0",
-    "vee-validate": "^4.15.0",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0",
-    "vue3-toastify": "^0.2.8",
-    "yup": "^1.6.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@mapbox/stylelint-processor-arbitrary-tags": "^0.4.0",
-    "@types/node": "^22.13.0",
-    "@types/vue": "^2.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.19.1",
-    "@typescript-eslint/parser": "^8.19.1",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/compiler-sfc": "^3.5.13",
-    "@vue/eslint-config-typescript": "^14.2.0",
-    "@vue/tsconfig": "^0.7.0",
-    "eslint": "^9.18.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.32.0",
-    "globals": "^15.14.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.2.11",
-    "postcss-html": "^1.8.0",
-    "prettier": "^3.4.2",
-    "sass": "^1.83.1",
-    "sass-loader": "^16.0.4",
-    "stylelint": "^16.13.2",
-    "stylelint-config-recommended": "^15.0.0",
-    "stylelint-config-recommended-vue": "^1.5.0",
-    "stylelint-config-standard": "^37.0.0",
-    "stylelint-config-standard-scss": "^14.0.0",
-    "stylelint-config-standard-vue": "^1.0.0",
-    "typescript": "~5.6.2",
-    "typescript-eslint": "^8.19.1",
-    "vite": "^6.0.5",
-    "vue-eslint-parser": "^9.4.3",
-    "vue-tsc": "^2.2.0"
+    "scripts": {
+      "build": "yarn workspaces run build",
+      "start": "yarn workspaces run start",
+      "start:front": "yarn workspace todo-crm run dev",
+      "start:back": "yarn workspace todo-app run dev"
+    }
   }
-}
