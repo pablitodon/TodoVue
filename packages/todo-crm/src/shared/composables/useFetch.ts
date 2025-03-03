@@ -1,13 +1,28 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ref, toValue } from 'vue';
+import { refreshAccessToken } from '~/entites/user/user.api';
+import { HttpMethod, UseFetchAxiosResponse } from '~/entites/user/user.types';
 
-
-interface UseFetchAxiosResponse<T> {
-  data: T | null;
-  error: string | null;
-  loading: boolean;
-}
-type HttpMethod = 'GET' | 'POST';
+// интерсептор
+axios.interceptors.response.use(
+  // успешный запрос
+  (response: AxiosResponse) => response,
+  // при ошибке  запрос на новый токен и повтор оригинального запроса
+  async (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      const newAccessToken = await refreshAccessToken();
+      if (newAccessToken) {
+        // error.config - config  оригиального запроса
+        const originalRequest = error.config;
+        if (originalRequest) {
+          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          return axios(originalRequest);
+        }
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const useFetchAxios = <T, P>(
   url: string,
@@ -32,7 +47,7 @@ export const useFetchAxios = <T, P>(
 
     try {
       const response = await methodMap[method]();
-      data.value = await response.data;
+      data.value = response.data;
       onSuccess?.();
     } catch (err) {
       if (err instanceof AxiosError) {

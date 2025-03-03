@@ -1,9 +1,7 @@
 <template>
-  <RegisterUser />
+  <router-view></router-view>
 </template>
 
-<script setup>
-import { RegisterUser } from '~/features/user/ui/register-user-form';
-</script>
+<script setup></script>
 
 <style lang="scss"></style>
