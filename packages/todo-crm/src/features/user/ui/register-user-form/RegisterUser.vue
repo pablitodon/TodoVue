@@ -35,7 +35,7 @@
               :src="eye.eyeLight"
               class="eye__icon"
               alt="Toggle Password Visibility"
-              @click="toggleVisibilityPassword"
+              @click="handleTogglePassword"
             />
           </div>
         </div>
@@ -48,7 +48,7 @@
           Продолжить
         </VButton>
         <div class="register-form__back">
-          <VButton type="button">
+          <VButton type="button" @click="handleTransitionTo()">
             <img :src="arrow.arrowBack" alt="Back Arrow" />
             Назад
           </VButton>
@@ -63,15 +63,17 @@ import { ref } from 'vue';
 import { eye, arrow } from '~/assets/svg/index';
 import { IUser } from '~/entites/user/user.types';
 import { registerUser } from '~/entites/user/user.api';
-import LoginRegisterWrapper from '~/shared/LoginRegisterWrapper.vue';
 import VInput from '~/shared/VInput.vue';
 import VButton from '~/shared/VButton.vue';
 import {
   resetFormData,
+  toggleVisibilityPassword,
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
 import { useToast } from '~/shared/composables/useToast';
+import { handleTransitionTo } from '~/shared/router/navigate';
+import LoginRegisterWrapper from '~/widgets/user/auth/LoginRegisterWrapper.vue';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
@@ -81,11 +83,11 @@ const formData = ref<IUser>({
 const isLoginValid = ref<boolean>(true);
 const isPasswordValid = ref<boolean>(true);
 
-const toggleVisibilityPassword = () => {
-  showPassword.value = !showPassword.value;
+const handleTogglePassword = () => {
+  toggleVisibilityPassword(showPassword);
 };
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   isLoginValid.value = validateLogin(formData.value.username);
   isPasswordValid.value = validatePassword(formData.value.password);
 
@@ -93,7 +95,10 @@ const handleSubmit = () => {
     useToast('Заполните все поля', 'error');
     return;
   }
-  registerUser(formData.value);
+  const { error, loading } = await registerUser(formData.value);
+  if (!error && !loading) {
+    handleTransitionTo();
+  }
   resetFormData(formData.value);
 };
 </script>
@@ -109,7 +114,6 @@ const handleSubmit = () => {
   width: 32.25rem;
   max-width: 100%;
   height: auto;
-  max-height: 85vh;
   border-radius: var(--radius-32);
   box-shadow: var(--shadow-form);
   box-sizing: border-box;
@@ -120,8 +124,7 @@ const handleSubmit = () => {
   }
 
   @include mixins.respond-to-laptop {
-    font-size: 1.8rem;
-    padding: 1.5rem 0;
+    max-width: 25rem;
   }
 
   @include mixins.respond-to-tablet {
@@ -130,14 +133,14 @@ const handleSubmit = () => {
   }
 
   @include mixins.respond-to-phone {
+    padding: 1rem;
     max-width: 100%;
   }
-
   &__fieldset {
     border: none;
     padding: 1.25rem;
 
-    @include mixins.respond-to-desktop {
+    @include mixins.respond-to-laptop {
       padding: 1rem;
     }
 
@@ -152,7 +155,7 @@ const handleSubmit = () => {
 
     @include mixins.respond-to-laptop {
       font-size: 1.8rem;
-      padding-top: 1.5rem;
+      padding-top: 0.5rem;
     }
 
     @include mixins.respond-to-tablet {
@@ -199,8 +202,8 @@ const handleSubmit = () => {
   }
 
   &__back {
-    margin: 2rem 0;
     cursor: pointer;
+    margin-top: 5rem;
   }
 }
 </style>

@@ -37,7 +37,7 @@
               :src="eye.eyeLight"
               class="eye__icon"
               alt="Toggle Password Visibility"
-              @click="toggleVisibilityPassword"
+              @click="handleTogglePassword"
             />
           </div>
         </div>
@@ -45,7 +45,9 @@
           Продолжить
         </VButton>
         <div class="login-form__back">
-          <VButton>Зарегистрироваться</VButton>
+          <VButton type="button" @click="handleTransitionTo('REGISTER')">
+            Зарегистрироваться
+          </VButton>
         </div>
       </fieldset>
     </form>
@@ -55,18 +57,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { eye } from '~/assets/svg/index';
-
 import VButton from '~/shared/VButton.vue';
 import VInput from '~/shared/VInput.vue';
-import LoginRegisterWrapper from '~/shared/LoginRegisterWrapper.vue';
 import { IUser } from '~/entites/user/user.types';
 import {
   resetFormData,
+  setAccessToken,
+  setRefreshToken,
+  toggleVisibilityPassword,
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
 import { loginUser } from '~/entites/user/user.api';
 import { useToast } from '~/shared/composables/useToast';
+import { handleTransitionTo } from '~/shared/router/navigate';
+import LoginRegisterWrapper from '~/widgets/user/auth/LoginRegisterWrapper.vue';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
@@ -76,20 +81,25 @@ const formData = ref<IUser>({
 const isLoginValid = ref<boolean>(true);
 const isPasswordValid = ref<boolean>(true);
 
-const toggleVisibilityPassword = () => {
-  showPassword.value = !showPassword.value;
+const handleTogglePassword = () => {
+  toggleVisibilityPassword(showPassword);
 };
-
-const handleSubmit = () => {
+const handleSubmit = async () => {
   isLoginValid.value = validateLogin(formData.value.username);
   isPasswordValid.value = validatePassword(formData.value.password);
   if (!isLoginValid.value || !isPasswordValid.value) {
     useToast('Заполните правильно все поля.', 'error');
     return;
   }
-
-  loginUser(formData.value);
-  resetFormData(formData.value);
+  const resp = await loginUser(formData.value);
+  const accessToken = resp?.accessToken;
+  const refreshToken = resp?.refreshToken;
+  if (accessToken && refreshToken) {
+    setAccessToken(accessToken);
+    setRefreshToken(refreshToken);
+    resetFormData(formData.value);
+    handleTransitionTo();
+  }
 };
 </script>
 <style scoped lang="scss">

@@ -1,7 +1,6 @@
 import { toast, ToastPosition } from 'vue3-toastify';
 import { h } from 'vue';
-import ToastIconError from '../Toasts/components/ToastIconError.vue';
-
+import   ToastIconError from '../toasts/components/ToastIconError.vue';
 const globalToastOptions = {
   autoClose: 3000,
   draggable: true,
@@ -18,15 +17,9 @@ export const useToast = (
     icon: type === 'error' ? () => h(ToastIconError) : undefined,
   };
   const toastTypes = {
-    success: function () {
-      return toast.success(message, toastOptions);
-    },
-    error: function () {
-      return toast.error(message, toastOptions);
-    },
-    pending: function () {
-      return toast.loading(message, toastOptions);
-    },
+    success: () => toast.success(message, toastOptions),
+    error: () => toast.error(message, toastOptions),
+    pending: () => toast.loading(message, toastOptions),
   };
   return toastTypes[type]();
 };
