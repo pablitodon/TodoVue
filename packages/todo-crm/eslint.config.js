@@ -22,10 +22,15 @@ export default typescriptEslint.config(
       },
     },
     rules: {
-      'vue/attribute-hyphenation': ['error', 'never', {
-        ignore: [],
-        ignoreTags: []
-      }]
+      'vue/attribute-hyphenation': [
+        'error',
+        'never',
+        {
+          ignore: [],
+          ignoreTags: [],
+        },
+      ],
+      'no-console': 'error',
     },
   },
   eslintConfigPrettier

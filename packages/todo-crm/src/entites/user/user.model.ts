@@ -1,6 +1,6 @@
 import { Ref } from 'vue';
 import { IUser } from './user.types';
-import router from '~/app/router';
+import { LOCALSTORAGE_KEYS } from '~/shared/constants/constants';
 
 export const validateLogin = (login: string): boolean => {
   return login.length > 0;
@@ -15,21 +15,21 @@ export const resetFormData = (formData: IUser): void => {
   formData.password = '';
 };
 
+export const setAccessToken = (token: string): void => {
+  localStorage.setItem(LOCALSTORAGE_KEYS.ACCESS_TOKEN, token);
+};
 
-export const setDataToken  = (key:string, token: string ):void => {
-  localStorage.setItem(`${key}`, token);
-} 
+export const getAccessToken = (): string | null => {
+  return localStorage.getItem(LOCALSTORAGE_KEYS.ACCESS_TOKEN);
+};
 
-export const getDataToken  = (key:string):string|null => {
- return localStorage.getItem(`${key}`);
-} 
+export const setRefreshToken = (token: string): void => {
+  localStorage.setItem(LOCALSTORAGE_KEYS.REFRESH_TOKEN, token);
+};
+export const getRefreshToken = (): string | null => {
+  return localStorage.getItem(LOCALSTORAGE_KEYS.REFRESH_TOKEN);
+};
 
-
- export  const toggleVisibilityPassword = (toggleElem:Ref<boolean>) => {
+export const toggleVisibilityPassword = (toggleElem: Ref<boolean>) => {
   toggleElem.value = !toggleElem.value;
 };
-
-export const handleTransitionTo = (page: string = '') => {
-  router.push(`/${page}`);
-};
-

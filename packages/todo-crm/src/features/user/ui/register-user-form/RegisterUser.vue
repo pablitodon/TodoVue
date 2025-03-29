@@ -48,7 +48,7 @@
           Продолжить
         </VButton>
         <div class="register-form__back">
-          <VButton type="button" @click="handleTransitionTo('')">
+          <VButton type="button" @click="handleTransitionTo()">
             <img :src="arrow.arrowBack" alt="Back Arrow" />
             Назад
           </VButton>
@@ -63,17 +63,17 @@ import { ref } from 'vue';
 import { eye, arrow } from '~/assets/svg/index';
 import { IUser } from '~/entites/user/user.types';
 import { registerUser } from '~/entites/user/user.api';
-import LoginRegisterWrapper from '~/shared/auth/LoginRegisterWrapper.vue';
 import VInput from '~/shared/VInput.vue';
 import VButton from '~/shared/VButton.vue';
 import {
-  handleTransitionTo,
   resetFormData,
   toggleVisibilityPassword,
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
 import { useToast } from '~/shared/composables/useToast';
+import { handleTransitionTo } from '~/shared/router/navigate';
+import LoginRegisterWrapper from '~/widgets/user/auth/LoginRegisterWrapper.vue';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({

@@ -1,18 +1,15 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ref, toValue } from 'vue';
-import { refreshAccessToken } from '~/entites/user/user.api';
+import { updateAccessToken } from '~/entites/user/user.api';
 import { HttpMethod, UseFetchAxiosResponse } from '~/entites/user/user.types';
 
-// интерсептор
 axios.interceptors.response.use(
-  // успешный запрос
   (response: AxiosResponse) => response,
   // при ошибке  запрос на новый токен и повтор оригинального запроса
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
-      const newAccessToken = await refreshAccessToken();
+      const newAccessToken = await updateAccessToken();
       if (newAccessToken) {
-        // error.config - config  оригиального запроса
         const originalRequest = error.config;
         if (originalRequest) {
           originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;

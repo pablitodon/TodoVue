@@ -45,7 +45,7 @@
           Продолжить
         </VButton>
         <div class="login-form__back">
-          <VButton type="button" @click="handleTransitionTo('register')">
+          <VButton type="button" @click="handleTransitionTo('REGISTER')">
             Зарегистрироваться
           </VButton>
         </div>
@@ -61,16 +61,17 @@ import VButton from '~/shared/VButton.vue';
 import VInput from '~/shared/VInput.vue';
 import { IUser } from '~/entites/user/user.types';
 import {
-  handleTransitionTo,
   resetFormData,
-  setDataToken,
+  setAccessToken,
+  setRefreshToken,
   toggleVisibilityPassword,
   validateLogin,
   validatePassword,
 } from '~/entites/user/user.model';
 import { loginUser } from '~/entites/user/user.api';
 import { useToast } from '~/shared/composables/useToast';
-import LoginRegisterWrapper from '~/shared/auth/LoginRegisterWrapper.vue';
+import { handleTransitionTo } from '~/shared/router/navigate';
+import LoginRegisterWrapper from '~/widgets/user/auth/LoginRegisterWrapper.vue';
 
 const showPassword = ref<boolean>(false);
 const formData = ref<IUser>({
@@ -94,10 +95,8 @@ const handleSubmit = async () => {
   const accessToken = resp?.accessToken;
   const refreshToken = resp?.refreshToken;
   if (accessToken && refreshToken) {
-    setDataToken('token', accessToken);
-    setDataToken('jwt', refreshToken);
-    console.log(localStorage);
-
+    setAccessToken(accessToken);
+    setRefreshToken(refreshToken);
     resetFormData(formData.value);
     handleTransitionTo();
   }
