@@ -18,3 +18,5 @@ export interface IStorageKeys {
   REFRESH_TOKEN: string;
 }
 export type HttpMethod = 'GET' | 'POST';
+
+export type FormType = 'login' | 'register';

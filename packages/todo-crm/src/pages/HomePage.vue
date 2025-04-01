@@ -5,6 +5,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+localStorage.clear();
+</script>
 
 <style lang="scss" scoped></style>

@@ -1,10 +1,12 @@
 <template>
   <main class="wrapper">
-    <slot></slot>
+    <AuthComponent />
   </main>
 </template>
 
-<script setup></script>
+<script setup>
+import AuthComponent from '~/widgets/user/AuthComponent/AuthComponent.vue';
+</script>
 
 <style lang="scss" scoped>
 .wrapper {
