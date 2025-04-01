@@ -1,20 +1,12 @@
+import path from 'path';
 import { createRouter, createWebHistory } from 'vue-router';
 import { getAccessToken } from '~/entites/user/user.model';
-import UserLogin from '~/features/user/ui/login-user-form/UserLogin.vue';
-import RegisterUser from '~/features/user/ui/register-user-form/RegisterUser.vue';
+import AuthLoginForm from '~/features/user/login/ui/AuthLoginForm.vue';
+import AuthRegisterForm from '~/features/user/register/ui/AuthRegisterForm.vue';
 import HomePage from '~/pages/HomePage.vue';
+import Authorization from '~/pages/user/auth/Authorization.vue';
 
 const routes = [
-  {
-    path: '/login',
-    name: 'login',
-    component: UserLogin,
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterUser,
-  },
   {
     path: '/',
     name: 'home',
@@ -22,6 +14,23 @@ const routes = [
     meta: {
       requireAuth: true,
     },
+  },
+  {
+    path: '/auth',
+    component: Authorization,
+    children: [
+      { path: '', redirect: { name: 'login' } },
+      {
+        path: 'login',
+        name: 'login',
+        component: AuthLoginForm,
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: AuthRegisterForm,
+      },
+    ],
   },
 ];
 
