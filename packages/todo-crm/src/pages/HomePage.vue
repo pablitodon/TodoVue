@@ -5,8 +5,4 @@
   </div>
 </template>
 
-<script setup>
-localStorage.clear();
-</script>
-
 <style lang="scss" scoped></style>
