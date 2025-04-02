@@ -1,11 +1,11 @@
 <template>
   <main class="wrapper">
-    <AuthComponent />
+    <AuthSwitcher />
   </main>
 </template>
 
 <script setup>
-import AuthComponent from '~/widgets/user/AuthComponent/AuthComponent.vue';
+import AuthSwitcher from '~/widgets/user/AuthSwitcher/AuthSwitcher.vue';
 </script>
 
 <style lang="scss" scoped>
